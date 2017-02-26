@@ -1,0 +1,70 @@
+<core:View xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 
+		controllerName="smithfield.transportation.v.Customers" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="customersPage">
+	 
+		<customHeader>
+			<Bar>
+			    <contentLeft>
+					<Button
+					    visible="{device>/isNoTouch}"
+						press="doRefresh"
+						icon="sap-icon://refresh">
+					</Button>
+				</contentLeft>
+				<contentRight>
+					<Button
+						press="logOff"
+						icon="sap-icon://log">
+					</Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		
+		<!-- <subHeader>
+			<Bar id="searchBar">
+		        <contentMiddle>
+		          <SearchField
+		            id="searchField"
+		            placeholder="Search by store name"
+		            search="handleSearch"
+		            showRefreshButton="{device>/isNoTouch}"
+		            width="100%">
+		          </SearchField>
+		        </contentMiddle>
+		    </Bar>
+		</subHeader> -->
+		
+		<content>
+		
+			<PullToRefresh
+	        id="pullToRefresh"
+	        visible="{device>/isTouch}"
+	        refresh="handleRefresh"/>
+	        
+			<List
+				id="oCustomersList"
+				class="customersList smithListStyle"
+				items="{/ShipToHeaderCol}"
+				mode="SingleSelectMaster"
+				itemPress="handleCustomerSelect"
+				headerText="Shipment To Store">
+				<items>
+					<CustomListItem type="Active">
+						<HBox>
+							<VBox fitContainer="true" alignItems="Center" justifyContent="Center" width="20%" class="storeIconBox">
+								<core:Icon src="sap-icon://retail-store" size="1.7rem" color="#F6C382" class="storeIcon"/>
+							</VBox>
+							<VBox fitContainer="true" alignItems="Center" justifyContent="Center" width="60%" class="shiptoBox">
+								<Text text="{ShipToName}" textAlign="Center" class="shiptoName"></Text>
+								<Label text="{ShipTo}" textAlign="Center" class="shiptoNumber"></Label>
+							</VBox>
+							<VBox fitContainer="true" alignItems="Center" justifyContent="Center" width="20%" class="arrowIconBox">
+								<core:Icon src="sap-icon://navigation-right-arrow" size="0.8rem" color="#6B6B69" class="arrowIcon"/>
+							</VBox>
+						</HBox>
+					</CustomListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,399 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	controllerName="smithfield.transportation.v.Detail"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{ShipToName} - {ShipTo}" showNavButton="true" navButtonPress="actBack" class="detailPage">
+	     
+	    <subHeader>
+	        <Bar height="" design="Auto" class="shipmentDetailHeader">
+				<contentMiddle>
+				    <core:Icon src="sap-icon://shipping-status" size="1.3rem"></core:Icon>
+				    <Text text="{Shipmentid}"></Text>
+				</contentMiddle>
+			</Bar>
+	    </subHeader>
+	    
+		<content>
+			<List class="shipmentDetailList" >
+			
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Carrier Name:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{CarrierName}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="ETA Date:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+								  path: 'DeliveryDate',
+								  formatter: 'smithfield.transportation.util.Formatter.ETAdate'
+								  }"  class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Cause of late:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{CauseOfLateT}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Comments:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text id="commentsValue" text="{
+								path: 'Comments',
+								formatter: 'smithfield.transportation.util.Formatter.lineBreak'
+							}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+		    </List>
+		    
+		    <List class="shipmentDetailList" >
+		    
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="From Plant (origin):" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{ShipFrom} - {ShipFromName}"  class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Depart Date: &#160;" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+								    path: 'DepartDate',
+								    formatter: 'smithfield.transportation.util.Formatter.date'
+								 }" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>	 
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Depart Time:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+								    path: 'DepartTime',
+								    formatter: 'smithfield.transportation.util.Formatter.time'
+								 }" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>	 
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="PO #:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+							path: 'CustomerPo',
+							formatter: 'smithfield.transportation.util.Formatter.ponumber'
+						}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="To City:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{ShipToCity}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="To State:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{ShipToState}" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Arrival Date:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+								    path: 'ArrivalDate',
+								    formatter: 'smithfield.transportation.util.Formatter.date'
+								 }" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>	 
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+				<CustomListItem>
+					<l:Grid
+						vSpacing="0"
+						hSpacing="1"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+						<Text text="Arrival Time:" class="detailLabel">
+							<layoutData>
+								<l:GridData
+									span="L4 M4 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>
+						</Text>
+						<Text text="{
+								    path: 'ArrivalTime',
+								    formatter: 'smithfield.transportation.util.Formatter.time'
+								 }" class="detailValue">
+							<layoutData>
+								<l:GridData
+									span="L8 M8 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</layoutData>	 
+						</Text>
+					</l:content>
+					</l:Grid>
+				</CustomListItem>
+				
+		    </List>
+		    
+		</content>
+	</Page>
+</core:View>

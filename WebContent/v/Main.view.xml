@@ -1,0 +1,294 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="smithfield.transportation.v.Main" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="MainPage" class="mainPage">
+		<customHeader>
+			<Bar> 
+				<contentLeft>
+					<Button
+						visible="true"
+						press="actBack"
+						icon="sap-icon://nav-back">
+					</Button>
+				</contentLeft>
+				<contentMiddle>
+					<Label text="{ShipToName} {ShipTo}"></Label>
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		
+		<!-- <subHeader>
+			<Bar id="searchBar">
+		        <contentMiddle>
+		          <SearchField
+		            id="searchField"
+		            placeholder="Search by customer Po #"
+		            search="handleSearch"
+		            showRefreshButton="{device>/isNoTouch}"
+		            width="100%">
+		          </SearchField>
+		        </contentMiddle>
+		    </Bar>
+		</subHeader> -->
+		
+		<content>
+			<PullToRefresh
+	        id="pullToRefresh"
+	        visible="{device>/isTouch}"
+	        refresh="handleRefresh"/>
+			<List 
+				id="oShipmentsList"
+				class="smithListStyle"
+				mode="SingleSelectMaster"
+				items="{}"
+				itemPress="handleShipmentSelect"
+				headerText="{ShipToName} {ShipTo} Recent Shipments">
+				<items>
+					<CustomListItem id="oShipmentsListItem" type="Active">
+					<l:Grid
+						vSpacing="0"
+						hSpacing="0"
+						defaultIndent="L0 M0 S0"
+						defaultSpan="L12 M12 S12">
+					<l:content>
+					
+						<l:Grid
+							vSpacing="0"
+							containerQuery="false"
+							defaultIndent="L0 M0 S0"
+							defaultSpan="L12 M12 S12">
+							<l:layoutData>
+								<l:GridData
+									span="L5 M5 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</l:layoutData>
+							
+							<l:content>
+							
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="Shipment#:" class="titleLabel"></Text>
+									<Text text="{Shipmentid}" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="From Plant:" class="titleLabel"></Text>
+									<Text text="{ShipFrom} - {ShipFromName}"  class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L12 M12 S12"
+											linebreakL="true"
+											linebreakM="true"
+											linebreakS="true" />
+									</l:layoutData>
+									<Text text="Carrier Name:" class="titleLabel"></Text>
+									<Text text="{CarrierName}" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="true"
+											linebreakM="true"
+											linebreakS="true" />
+									</l:layoutData>
+									<Text text="Depart Date:" class="titleLabel"></Text>
+									<Text text="{
+									          	path: 'DepartDate',
+									          	formatter: 'smithfield.transportation.util.Formatter.date'
+									          }"  class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="Depart Time:" class="titleLabel"></Text>
+									<Text text="{
+									          	path: 'DepartTime',
+									          	formatter: 'smithfield.transportation.util.Formatter.time'
+									          }"  class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+							</l:content>
+						</l:Grid>
+						
+						<l:Grid
+							vSpacing="0"
+							hSpacing="0"
+							defaultIndent="L0 M0 S0"
+							defaultSpan="L12 M12 S12">
+							<l:layoutData>
+								<l:GridData
+									span="L1 M1 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</l:layoutData>
+							<l:content>
+							<core:Icon src="sap-icon://shipping-status" size="1.7rem" color="#A1490B" class="truckIcon"></core:Icon>
+							</l:content>
+						</l:Grid>
+						
+						<l:Grid
+							vSpacing="0"
+							containerQuery="false"
+							defaultIndent="L0 M0 S0"
+							defaultSpan="L12 M12 S12">
+							<l:layoutData>
+								<l:GridData
+									span="L6 M6 S12"
+									linebreakL="false"
+									linebreakM="false"
+									linebreakS="true" />
+							</l:layoutData>
+									
+							<l:content>
+							
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="To City:" class="titleLabel"></Text>
+									<Text text="{ShipToCity}" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="To State:" class="titleLabel"></Text>
+									<Text text="{ShipToState}" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L12 M12 S12"
+											linebreakL="true"
+											linebreakM="true"
+											linebreakS="true" />
+									</l:layoutData>
+									<Text text="PO #:" class="titleLabel"></Text>
+									<Text text="{
+								          	path: 'CustomerPo',
+								          	formatter: 'smithfield.transportation.util.Formatter.ponumber'
+								          }" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="true"
+											linebreakM="true"
+											linebreakS="true" />
+									</l:layoutData>
+									<Text text="Arrival Date:" class="titleLabel"></Text>
+									<Text text="{
+								          	path: 'ArrivalDate',
+								          	formatter: 'smithfield.transportation.util.Formatter.date'
+								          }" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+								<l:VerticalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L6 M6 S6"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="false" />
+									</l:layoutData>
+									<Text text="Arrival Time:" class="titleLabel"></Text>
+									<Text text="{
+								          	path: 'ArrivalTime',
+								          	formatter: 'smithfield.transportation.util.Formatter.time'
+								          }" class="valueLabel"></Text>
+								</l:VerticalLayout>
+								
+							</l:content>
+						</l:Grid>
+						
+						<l:Grid
+							class="ETAContainer"
+							vSpacing="0"
+							defaultIndent="L0 M0 S0"
+							defaultSpan="L12 M12 S12">
+							<l:layoutData>
+								<l:GridData
+									span="L12 M12 S12"
+									linebreakL="true"
+									linebreakM="true"
+									linebreakS="true" />
+							</l:layoutData>
+									
+							<l:content>
+							
+								<l:HorizontalLayout>
+									<l:layoutData>
+										<l:GridData
+											span="L2 M2 S12"
+											linebreakL="true"
+											linebreakM="true"
+											linebreakS="true" />
+									</l:layoutData>
+									<Text text="ETA Date:" class="ETAlabel"></Text>
+									<core:Icon src="sap-icon://favorite" size="0.7rem" color="#FFA518"/>
+								</l:HorizontalLayout>
+								
+								<Text text="{
+									path: 'DeliveryDate',
+									formatter: 'smithfield.transportation.util.Formatter.ETAdate'
+									}" class="ETAvalue">
+									<layoutData>
+										<l:GridData
+											span="L10 M10 S12"
+											linebreakL="false"
+											linebreakM="false"
+											linebreakS="true" />
+									</layoutData>
+								</Text>
+								
+							</l:content>
+						</l:Grid>
+						
+					</l:content>
+					</l:Grid>
+						
+					</CustomListItem>
+				</items>
+			</List>
+		</content>
+		
+	</Page>
+</core:View>
